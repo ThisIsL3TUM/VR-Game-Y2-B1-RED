@@ -32,6 +32,7 @@ public class Orders : MonoBehaviour
     public float addicMin = 0;
     public bool winning = false;
     public bool losing = false;
+    public bool SoldToCustomer = false;
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip soldClip;
@@ -146,6 +147,7 @@ public class Orders : MonoBehaviour
     {
         Money += carrotPrice * Carrot.Count + tomatoPrice * Tomato.Count + lettucePrice * Lettuce.Count;
         audioSource.PlayOneShot(soldClip);
+        SoldToCustomer = true;
 
         EvaluateDrugs(Carrot);
         EvaluateDrugs(Tomato);
@@ -165,6 +167,7 @@ public class Orders : MonoBehaviour
         Debug.Log("Money: " + Money);
         Debug.Log("Suspicion: " + sus);
         Debug.Log("Addictivness: " + addic);
+
         WinCon();
     }
 

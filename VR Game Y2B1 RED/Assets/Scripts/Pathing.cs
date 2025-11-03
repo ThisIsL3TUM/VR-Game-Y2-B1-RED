@@ -18,6 +18,7 @@ public class NPCRouting : MonoBehaviour
     private bool playerInteracted = false;
     private bool pressed = false;
     private Vector3 spawnPosition;       // Original spawn point
+    public Orders orders;
 
     void Start()
     {
@@ -73,10 +74,11 @@ public class NPCRouting : MonoBehaviour
         }
 
         // Check for VR interaction
-        if (waitingForPlayer && pressed)
+        if (waitingForPlayer && orders.SoldToCustomer && pressed)
         {
             playerInteracted = true;
             waitingForPlayer = false;
+            orders.SoldToCustomer = false;
             pressed = false;
             agent.isStopped = false;
             MoveToNextWaypoint();
