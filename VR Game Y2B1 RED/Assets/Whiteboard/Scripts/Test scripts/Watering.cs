@@ -8,8 +8,11 @@ public class Watering : MonoBehaviour
     public float currentWater = 0;
     public Growth growth;
     public Image Fill;
+    [SerializeField] private AudioSource audioSource; 
     
-    
+    private bool isPlaying = false;
+
+
     bool[] triggered = { false, false, false };
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,14 +35,27 @@ public class Watering : MonoBehaviour
             //Debug.Log("started colliding with can "+ other.gameObject.name);
             if(other.gameObject.transform.rotation.x <= 250 && currentWater <= maxWater)
             {
-                if(currentWater == 0)
+                if(audioSource.loop == true && isPlaying == false)
+                {
+                    isPlaying = true;
+                    audioSource.Play();
+                }
+                
+                
+                if (currentWater == 0)
                 {
                     StartCoroutine(LifetimeTimer());
                 }
                 currentWater += 1f;
+                
                 Fill.fillAmount = currentWater / 100f;
 
 
+            }
+            else
+            {
+                audioSource.loop = false;
+                isPlaying = false;
             }
         }
     }

@@ -12,6 +12,8 @@ public class Injection : MonoBehaviour
     public bool dose3 = false;
     public int durability = 0;
     public GameObject injection;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip grabClip;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,7 +36,8 @@ public class Injection : MonoBehaviour
                 if (dose1 == true && injection.GetComponent<Drugged>().drugged == false) 
                 { 
                 injection.GetComponent<Drugged>().drug1 = true; 
-                injection.GetComponent<Drugged>().amDrugged(); 
+                injection.GetComponent<Drugged>().amDrugged();
+                audioSource.PlayOneShot(grabClip);
                 Debug.Log("drugged");
                 
                 durability--;
@@ -43,6 +46,7 @@ public class Injection : MonoBehaviour
                 { 
                 injection.GetComponent<Drugged>().drug2 = true;
                 injection.GetComponent<Drugged>().amDrugged();
+                audioSource.PlayOneShot(grabClip);
                 Debug.Log("drugged");
                 
                 durability--;
@@ -51,6 +55,7 @@ public class Injection : MonoBehaviour
                 { 
                 injection.GetComponent<Drugged>().drug3 = true;
                 injection.GetComponent<Drugged>().amDrugged();
+                audioSource.PlayOneShot(grabClip);
                 Debug.Log("drugged");
                 
                 durability--;

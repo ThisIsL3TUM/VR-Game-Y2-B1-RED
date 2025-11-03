@@ -16,6 +16,8 @@ public class Growth : MonoBehaviour
     public float speedMultiplier;
     public float hydration = 0;
     public Vector3 skibidi = new Vector3(0.5f, 0.5f, 0.5f);
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip grabClip;
 
 
 
@@ -31,6 +33,7 @@ public class Growth : MonoBehaviour
     {
         while (growthProgress < growthTime)
         {
+            
             // Apply speed multiplier
             growthProgress += Time.deltaTime * speedMultiplier * hydration;
             if(growthProgress/growthTime  > 0.5)
@@ -40,12 +43,14 @@ public class Growth : MonoBehaviour
             // Optional: update a UI bar here
             yield return null;
         }
+        
         CarrotsGrown++;
         //Debug.Log("carrots grown" + CarrotsGrown);
         Vector3 spawnPos = (spawn.transform.position);
 
         Instantiate(carrot, spawnPos, Quaternion.identity);
-        
+        audioSource.PlayOneShot(grabClip);
+        yield return new WaitForSeconds(grabClip.length);
         condition = true;
         Destroy(this.gameObject);
     }

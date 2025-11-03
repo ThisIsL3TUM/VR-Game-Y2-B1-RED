@@ -31,6 +31,9 @@ public class Orders : MonoBehaviour
     public float susMin = 0;
     public float addicMin = 0;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip soldClip;
+
     public Suspicion_manager suspicion_Manager;
 
     void Start()
@@ -138,6 +141,7 @@ public class Orders : MonoBehaviour
     public void Sold()
     {
         Money += carrotPrice * Carrot.Count + tomatoPrice * Tomato.Count + lettucePrice * Lettuce.Count;
+        audioSource.PlayOneShot(soldClip);
 
         EvaluateDrugs(Carrot);
         EvaluateDrugs(Tomato);
