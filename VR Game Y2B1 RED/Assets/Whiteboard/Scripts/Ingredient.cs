@@ -123,7 +123,7 @@ public class Ingredient : MonoBehaviour
             if (vegetables[i] == true && dirt == true || dirt == true && vegetables[i] == true)
             {
                 
-                crop = Instantiate(Product[i], spawnPos, Quaternion.identity);
+                crop = Instantiate(Product[i], spawnPos, spawn.transform.rotation);
 
                 joseph = Product[i].GetComponentInChildren<Growth>().growthTime;
                 currentlyGrowing = true;

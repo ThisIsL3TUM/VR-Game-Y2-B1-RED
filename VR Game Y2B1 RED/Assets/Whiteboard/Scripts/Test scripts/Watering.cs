@@ -1,11 +1,13 @@
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Watering : MonoBehaviour
 {
     public float maxWater = 100;
     public float currentWater = 0;
     public Growth growth;
+    public Image Fill;
     
     
     bool[] triggered = { false, false, false };
@@ -35,8 +37,9 @@ public class Watering : MonoBehaviour
                     StartCoroutine(LifetimeTimer());
                 }
                 currentWater += 1f;
-                
-                
+                Fill.fillAmount = currentWater / 100f;
+
+
             }
         }
     }
@@ -49,6 +52,7 @@ public class Watering : MonoBehaviour
         {
             
             currentWater -= Time.deltaTime;
+            Fill.fillAmount = currentWater / 100f;
 
             
             if (currentWater > 75 && triggered[0] == false)
