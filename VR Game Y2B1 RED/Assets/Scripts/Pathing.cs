@@ -1,5 +1,8 @@
+using System.Threading;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class NPCRouting : MonoBehaviour
 {
@@ -12,6 +15,9 @@ public class NPCRouting : MonoBehaviour
     private int currentWaypoint = 0;
     private bool waitingForPlayer = false;
     private bool playerInteracted = false;
+    public bool pressed = false;
+
+    public InputActionReference customButton;
 
     void Start()
     {
@@ -25,7 +31,11 @@ public class NPCRouting : MonoBehaviour
         }
 
         agent.SetDestination(waypoints[currentWaypoint].position);
+        customButton.action.started += Drop;
     }
+    
+        
+   
 
     void Update()
     {
@@ -60,7 +70,7 @@ public class NPCRouting : MonoBehaviour
         }
 
         // Wait for player input
-        if (waitingForPlayer && Input.GetKeyDown(KeyCode.O))
+        if (waitingForPlayer && pressed == true)
         {
             playerInteracted = true;
             waitingForPlayer = false;
@@ -69,12 +79,18 @@ public class NPCRouting : MonoBehaviour
             Debug.Log("Player interacted. NPC continues on path.");
         }
 
+
         // Stop or despawn at end
         if (playerInteracted && currentWaypoint >= waypoints.Length)
         {
             agent.isStopped = true;
             // Optional: Destroy(gameObject, 2f);
         }
+    }
+
+    void Drop(InputAction.CallbackContext context)
+    {
+        pressed = true;
     }
 
     void MoveToNextWaypoint()
