@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 
 public class Detection : MonoBehaviour
@@ -23,11 +24,13 @@ public class Detection : MonoBehaviour
     public GameObject syringe;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip grabClip;
+    [SerializeField]
+    private VisualEffect vfx;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        vfx.Stop();
     }
 
     // Update is called once per frame
@@ -94,7 +97,7 @@ public class Detection : MonoBehaviour
         Vector3 spawnPos = (spawn.transform.position);
         if (Speed == true && Power == true || Power == true && Speed == true) 
         {
-            Instantiate(Particle, spawnPos, Quaternion.identity);
+            vfx.Play();
             syringe = Instantiate(Product[0], spawnPos, Quaternion.identity);
             if (syringe != null)
             {
@@ -104,7 +107,7 @@ public class Detection : MonoBehaviour
         }
             else if (Speed == true && Something == true || Something == true && Speed == true)
         {
-            Instantiate(Particle, spawnPos, Quaternion.identity);
+            vfx.Play();
             syringe = Instantiate(Product[1], spawnPos, Quaternion.identity);
             if (syringe != null)
             {
@@ -114,7 +117,7 @@ public class Detection : MonoBehaviour
         }
             else if (Power == true && Something == true || Something == true && Power == true)
         {
-            Instantiate(Particle, spawnPos, Quaternion.identity);
+            vfx.Play();
             syringe = Instantiate(Product[2], spawnPos, Quaternion.identity);
             if (syringe != null)
             {
@@ -122,11 +125,19 @@ public class Detection : MonoBehaviour
             }
             Reset();
         }
+
         
+
+}
+    private System.Collections.IEnumerator VfxStop()
+    {
+        yield return new WaitForSeconds(1);
+        vfx.Stop();
     }
 
     private void Reset()
     {
+        StartCoroutine(VfxStop());
         audioSource.PlayOneShot(grabClip);
         Speed = false;
         Power = false;

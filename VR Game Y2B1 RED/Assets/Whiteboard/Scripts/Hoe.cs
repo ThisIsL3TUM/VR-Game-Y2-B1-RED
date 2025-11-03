@@ -9,6 +9,7 @@ public class Hoe : MonoBehaviour
     public Ingredient ingredient;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip dirtClip;
+    public ParticleSystem waterEffect;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,6 +26,7 @@ public class Hoe : MonoBehaviour
         if (other.gameObject.CompareTag("Hoe"))
         {
             DirtTransform--;
+            waterEffect.Play();
             audioSource.PlayOneShot(dirtClip);
             if (DirtTransform == 0)
             {
