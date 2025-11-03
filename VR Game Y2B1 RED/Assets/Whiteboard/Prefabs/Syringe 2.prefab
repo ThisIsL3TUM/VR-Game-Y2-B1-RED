@@ -519,7 +519,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: f1ac6d2dc4d6b0e40917f22bf84a7715, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 89d46d094aa7a7c41a22e858257fdacb, type: 2}
+      objectReference: {fileID: 2100000, guid: 2059d1f044a6dc94cb17a4011aea325f, type: 2}
     - target: {fileID: 919132149155446097, guid: f1ac6d2dc4d6b0e40917f22bf84a7715, type: 3}
       propertyPath: m_Name
       value: Syringe 2

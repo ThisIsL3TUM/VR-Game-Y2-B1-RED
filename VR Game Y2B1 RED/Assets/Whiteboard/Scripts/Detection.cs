@@ -21,8 +21,9 @@ public class Detection : MonoBehaviour
     public ParticleSystem Particle;
     [SerializeField]
     public GameObject syringe;
-    
-    
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip grabClip;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -126,6 +127,7 @@ public class Detection : MonoBehaviour
 
     private void Reset()
     {
+        audioSource.PlayOneShot(grabClip);
         Speed = false;
         Power = false;
         Something = false;
