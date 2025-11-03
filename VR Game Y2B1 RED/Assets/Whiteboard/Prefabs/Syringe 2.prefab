@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5aceaf29d52e0dd4d9fc31a35c4d3b8d, type: 3}
       propertyPath: m_Name
-      value: Syringe
+      value: Syringe 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5aceaf29d52e0dd4d9fc31a35c4d3b8d, type: 3}
       propertyPath: m_TagString
@@ -174,6 +174,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5aceaf29d52e0dd4d9fc31a35c4d3b8d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6773939068726588521}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5aceaf29d52e0dd4d9fc31a35c4d3b8d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2271631576928322034}
   m_SourcePrefab: {fileID: 100100000, guid: 5aceaf29d52e0dd4d9fc31a35c4d3b8d, type: 3}
 --- !u!1 &1284646766595018906 stripped
 GameObject:
@@ -351,6 +354,27 @@ MonoBehaviour:
   dose3: 0
   durability: 5
   injection: {fileID: 0}
+--- !u!65 &2271631576928322034
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284646766595018906}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08, y: 0.06, z: 0.08}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1916329749684177440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5aceaf29d52e0dd4d9fc31a35c4d3b8d, type: 3}
@@ -423,7 +447,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: f1ac6d2dc4d6b0e40917f22bf84a7715, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1c38bced4e307de4c9a2d0edb7a20534, type: 2}
+      objectReference: {fileID: 2100000, guid: 89d46d094aa7a7c41a22e858257fdacb, type: 2}
     - target: {fileID: 919132149155446097, guid: f1ac6d2dc4d6b0e40917f22bf84a7715, type: 3}
       propertyPath: m_Name
       value: Syringe 2
@@ -432,9 +456,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f1ac6d2dc4d6b0e40917f22bf84a7715, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5724531829835264292}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f1ac6d2dc4d6b0e40917f22bf84a7715, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1299967967474891172}
@@ -449,27 +470,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f1ac6d2dc4d6b0e40917f22bf84a7715, type: 3}
   m_PrefabInstance: {fileID: 7120404070340662940}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &5724531829835264292
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7931305236082961357}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.07013682, y: 0.045502704, z: 0.1604069}
-  m_Center: {x: 0, y: -0.000000059604645, z: 0.004179}
 --- !u!65 &1299967967474891172
 BoxCollider:
   m_ObjectHideFlags: 0
