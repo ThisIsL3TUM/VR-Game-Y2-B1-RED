@@ -49574,8 +49574,12 @@ MonoBehaviour:
   addicMax: 100
   susMin: 0
   addicMin: 0
+  winning: 1
+  losing: 0
   audioSource: {fileID: 1623602184}
   soldClip: {fileID: 8300000, guid: 499ba877039adef4db94f0824fd69e49, type: 3}
+  Win: {fileID: 8300000, guid: b928b528b296a0948a26a5d3c59463b5, type: 3}
+  Lose: {fileID: 8300000, guid: 33f8c64497fc71b46b215e76d8199248, type: 3}
   suspicion_Manager: {fileID: 1005481370}
 --- !u!4 &8066094726510217740
 Transform:

@@ -30,9 +30,13 @@ public class Orders : MonoBehaviour
     public float addicMax = 100;
     public float susMin = 0;
     public float addicMin = 0;
+    public bool winning = false;
+    public bool losing = false;
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip soldClip;
+    [SerializeField] private AudioClip Win;
+    [SerializeField] private AudioClip Lose;
 
     public Suspicion_manager suspicion_Manager;
 
@@ -167,12 +171,14 @@ public class Orders : MonoBehaviour
 
     public void WinCon()
     {
-        if (sus > susMax)
+        if (losing == true)
         {
+            audioSource.PlayOneShot(Lose);
             Debug.Log("U lost");
         }
-        else if(addic > addicMax)
+        else if(winning == true)
         {
+            audioSource.PlayOneShot(Win);
             Debug.Log("U won");
         }
     }

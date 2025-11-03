@@ -14,6 +14,7 @@ public class Injection : MonoBehaviour
     public GameObject injection;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip grabClip;
+    [SerializeField] private AudioClip voiceSource;
     public ParticleSystem waterEffect;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -40,6 +41,7 @@ public class Injection : MonoBehaviour
                 injection.GetComponent<Drugged>().amDrugged();
                 waterEffect.Play();
                 audioSource.PlayOneShot(grabClip);
+                StartCoroutine(Sound());
                 Debug.Log("drugged");
                 
                 durability--;
@@ -50,6 +52,7 @@ public class Injection : MonoBehaviour
                 injection.GetComponent<Drugged>().amDrugged();
                 waterEffect.Play();
                 audioSource.PlayOneShot(grabClip);
+                StartCoroutine(Sound());
                 Debug.Log("drugged");
                 
                 durability--;
@@ -60,11 +63,19 @@ public class Injection : MonoBehaviour
                 injection.GetComponent<Drugged>().amDrugged();
                 waterEffect.Play();
                 audioSource.PlayOneShot(grabClip);
+                StartCoroutine(Sound());
+
                 Debug.Log("drugged");
                 
                 durability--;
                 }
                 if(durability == 0) {Destroy(this.gameObject);}
         }
+    }
+
+    private System.Collections.IEnumerator Sound()
+    {
+        yield return new WaitForSeconds(2);
+        audioSource.PlayOneShot(voiceSource);
     }
 }
