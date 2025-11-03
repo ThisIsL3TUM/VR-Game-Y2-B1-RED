@@ -121,7 +121,7 @@ public class Create : MonoBehaviour
     {
         Vector3 spawnPos = SpawnPos.transform.position;
         yield return new WaitForSeconds(2);
-        Instantiate(Item, spawnPos, Quaternion.identity);
+        Instantiate(Item, spawnPos, SpawnPos.transform.rotation);
         stock--;
         UpdateQuestText();
     }

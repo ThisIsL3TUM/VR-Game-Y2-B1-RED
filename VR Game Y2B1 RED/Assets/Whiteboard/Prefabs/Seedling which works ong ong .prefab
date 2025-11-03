@@ -72,7 +72,7 @@ Transform:
   m_GameObject: {fileID: 4427730210211572935}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.86, z: 0}
+  m_LocalPosition: {x: 0, y: -3.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c154b9f0a793134a9d1f71f03efb6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carrot: {fileID: 259520367635025349, guid: fa0012585d0325948818eb0b108090d8, type: 3}
+  carrot: {fileID: 7551402965178693387, guid: 0d2adff1cf724c743a7ea59147f557b5, type: 3}
   spawn: {fileID: 4427730210211572935}
   CarrotsGrown: 0
   condition: 0
