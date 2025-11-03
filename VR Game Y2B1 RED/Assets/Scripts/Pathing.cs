@@ -1,8 +1,7 @@
-using System.Threading;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class NPCRouting : MonoBehaviour
 {
@@ -10,14 +9,15 @@ public class NPCRouting : MonoBehaviour
     public int stopAtWaypointIndex = 2;  // Index where NPC waits for player
     public float stopDistance = 1f;      // Distance threshold for reaching a waypoint
     public Transform player;             // Reference to the player object
+    public InputActionReference customButton; // For VR input (trigger, button, etc.)
+    public float respawnDelay = 3f;      // Time before NPC respawns
 
     private NavMeshAgent agent;
     private int currentWaypoint = 0;
     private bool waitingForPlayer = false;
     private bool playerInteracted = false;
-    public bool pressed = false;
-
-    public InputActionReference customButton;
+    private bool pressed = false;
+    private Vector3 spawnPosition;       // Original spawn point
 
     void Start()
     {
@@ -25,28 +25,31 @@ public class NPCRouting : MonoBehaviour
 
         if (waypoints.Length == 0)
         {
-            Debug.LogError("No waypoints assigned to NPCPathSingle_FacePlayer!");
+            Debug.LogError("No waypoints assigned to NPCRouting!");
             enabled = false;
             return;
         }
 
+        // Remember where the NPC spawned
+        spawnPosition = transform.position;
+
+        // Start moving to the first waypoint
         agent.SetDestination(waypoints[currentWaypoint].position);
+
+        // Subscribe to VR button press
         customButton.action.started += Drop;
     }
-    
-        
-   
 
     void Update()
     {
         if (agent.pathPending) return;
 
-        // Check if NPC reached current waypoint
+        // Move between waypoints
         if (!waitingForPlayer && agent.remainingDistance < stopDistance)
         {
-            // Stop and wait for player
             if (currentWaypoint == stopAtWaypointIndex && !playerInteracted)
             {
+                // Stop and wait for player
                 agent.isStopped = true;
                 waitingForPlayer = true;
                 Debug.Log("NPC waiting for player interaction...");
@@ -61,7 +64,7 @@ public class NPCRouting : MonoBehaviour
         if (waitingForPlayer && player != null)
         {
             Vector3 lookDirection = (player.position - transform.position);
-            lookDirection.y = 0; // Keep rotation flat
+            lookDirection.y = 0;
             if (lookDirection.sqrMagnitude > 0.01f)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
@@ -69,22 +72,15 @@ public class NPCRouting : MonoBehaviour
             }
         }
 
-        // Wait for player input
-        if (waitingForPlayer && pressed == true)
+        // Check for VR interaction
+        if (waitingForPlayer && pressed)
         {
             playerInteracted = true;
             waitingForPlayer = false;
+            pressed = false;
             agent.isStopped = false;
             MoveToNextWaypoint();
             Debug.Log("Player interacted. NPC continues on path.");
-        }
-
-
-        // Stop or despawn at end
-        if (playerInteracted && currentWaypoint >= waypoints.Length)
-        {
-            agent.isStopped = true;
-            // Optional: Destroy(gameObject, 2f);
         }
     }
 
@@ -103,7 +99,34 @@ public class NPCRouting : MonoBehaviour
         }
         else
         {
-            Debug.Log("NPC reached end of path.");
+            Debug.Log("NPC reached end of path. Despawning...");
+            StartCoroutine(RespawnNPC());
         }
+    }
+
+    IEnumerator RespawnNPC()
+    {
+        // Disable NPC while despawning
+        agent.isStopped = true;
+        yield return new WaitForSeconds(respawnDelay);
+
+        // Reset NPC state and teleport back to start
+        transform.position = spawnPosition;
+        currentWaypoint = 0;
+        playerInteracted = false;
+        waitingForPlayer = false;
+        pressed = false;
+        agent.isStopped = false;
+
+        // Restart path
+        agent.SetDestination(waypoints[currentWaypoint].position);
+
+        Debug.Log("NPC respawned at start.");
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe to prevent input leak
+        customButton.action.started -= Drop;
     }
 }
