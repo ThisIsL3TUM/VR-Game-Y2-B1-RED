@@ -41,6 +41,10 @@ public class Orders : MonoBehaviour
 
     public Suspicion_manager suspicion_Manager;
 
+    public GameObject WinScreen;
+    public GameObject LoseScreen;
+    public GameObject SuspicionScreen;
+
     void Start()
     {
         GenerateNewOrder();
@@ -176,11 +180,17 @@ public class Orders : MonoBehaviour
     {
         if (losing == true)
         {
+            SuspicionScreen.SetActive(true);
+            LoseScreen.SetActive(true);
+            WinScreen.SetActive(false);
             audioSource.PlayOneShot(Lose);
             Debug.Log("U lost");
         }
         else if(winning == true)
         {
+            SuspicionScreen.SetActive(true);
+            LoseScreen.SetActive(false);
+            WinScreen.SetActive(true);
             audioSource.PlayOneShot(Win);
             Debug.Log("U won");
         }
