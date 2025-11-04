@@ -20155,6 +20155,7 @@ MonoBehaviour:
   player: {fileID: 322816276}
   customButton: {fileID: 5779929252418359088, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   respawnDelay: 3
+  waitingForPlayer: 0
   orders: {fileID: 8065178809858216532}
 --- !u!95 &1600271671
 Animator:
@@ -48271,7 +48272,7 @@ MonoBehaviour:
   addicMax: 100
   susMin: 0
   addicMin: 0
-  winning: 1
+  winning: 0
   losing: 0
   SoldToCustomer: 0
   audioSource: {fileID: 1623602184}
@@ -48282,6 +48283,7 @@ MonoBehaviour:
   WinScreen: {fileID: 1769092504}
   LoseScreen: {fileID: 96472575}
   SuspicionScreen: {fileID: 1045941580}
+  NPCRouting: {fileID: 1600271670}
 --- !u!4 &8066094726510217740
 Transform:
   m_ObjectHideFlags: 0
