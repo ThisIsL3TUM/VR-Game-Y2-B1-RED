@@ -21,6 +21,7 @@ TagManager:
   - Tomato
   - Lettuce
   - LettuceSeed
+  - TomatoG
   layers:
   - Default
   - TransparentFX

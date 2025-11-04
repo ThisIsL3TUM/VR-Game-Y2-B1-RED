@@ -31,7 +31,7 @@ public class Injection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GrownCarrot")|| other.CompareTag("Tomato") || other.CompareTag("Lettuce"))
+        if (other.CompareTag("GrownCarrot")|| other.CompareTag("TomatoG") || other.CompareTag("Lettuce"))
             
         {
                 injection = other.gameObject;

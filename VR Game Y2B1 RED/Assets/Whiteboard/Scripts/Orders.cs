@@ -44,7 +44,7 @@ public class Orders : MonoBehaviour
     public GameObject WinScreen;
     public GameObject LoseScreen;
     public GameObject SuspicionScreen;
-
+    public NPCRouting NPCRouting;
     void Start()
     {
         GenerateNewOrder();
@@ -53,6 +53,7 @@ public class Orders : MonoBehaviour
     void Update()
     {
         CheckOrder();
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -60,7 +61,7 @@ public class Orders : MonoBehaviour
         
         if (other.CompareTag("GrownCarrot") && !Carrot.Contains(other.gameObject))
             Carrot.Add(other.gameObject);
-        else if (other.CompareTag("Tomato") && !Tomato.Contains(other.gameObject))
+        else if (other.CompareTag("TomatoG") && !Tomato.Contains(other.gameObject))
             Tomato.Add(other.gameObject);
         else if (other.CompareTag("Lettuce") && !Lettuce.Contains(other.gameObject))
             Lettuce.Add(other.gameObject);
@@ -98,7 +99,7 @@ public class Orders : MonoBehaviour
     {
         if (Carrot.Count >= requiredCarrots &&
             Tomato.Count >= requiredTomatoes &&
-            Lettuce.Count >= requiredLettuces)
+            Lettuce.Count >= requiredLettuces && NPCRouting.waitingForPlayer)
         {
             Sold();
             GenerateNewOrder();
@@ -116,7 +117,7 @@ public class Orders : MonoBehaviour
             if (drug.drug1 == false && drug.drug2 == false && drug.drug3 == false)
             {
                 
-                suspicion_Manager.GetSuspicion(1f);
+                suspicion_Manager.GetSuspicion(0f);
                 suspicion_Manager.GetAddiction(1f);
                 Debug.Log("Yes" + suspicion_Manager.suspicionAmount);
                 //sus -= 10;
@@ -124,7 +125,7 @@ public class Orders : MonoBehaviour
             }
             else if (drug.drug1 == true)
             {
-                suspicion_Manager.GetSuspicion(10f);
+                suspicion_Manager.GetSuspicion(12f);
                 suspicion_Manager.GetAddiction(10f);
 
                 //sus += 10;
@@ -132,15 +133,15 @@ public class Orders : MonoBehaviour
             }
             else if (drug.drug2 == true)
             {
-                suspicion_Manager.GetSuspicion(20f);
-                suspicion_Manager.GetAddiction(20f);
+                suspicion_Manager.GetSuspicion(15f);
+                suspicion_Manager.GetAddiction(15f);
                 //sus += 20;
                 //addic += 25;
             }
             else if (drug.drug3 == true)
             {
-                suspicion_Manager.GetSuspicion(30f);
-                suspicion_Manager.GetAddiction(30f);
+                suspicion_Manager.GetSuspicion(25f);
+                suspicion_Manager.GetAddiction(20f);
                 //sus += 50;
                 //addic += 40;
             }
@@ -178,6 +179,17 @@ public class Orders : MonoBehaviour
 
     public void WinCon()
     {
+        if (suspicion_Manager.addictionAmount >= 95)
+        {
+            winning = true;
+            Debug.Log("winnin");
+        }
+        else if (suspicion_Manager.suspicionAmount >= 95)
+        {
+            losing = true;
+            Debug.Log("losin");
+        }
+
         if (losing == true)
         {
             SuspicionScreen.SetActive(true);
@@ -186,7 +198,7 @@ public class Orders : MonoBehaviour
             audioSource.PlayOneShot(Lose);
             Debug.Log("U lost");
         }
-        else if(winning == true)
+        else if (winning == true)
         {
             SuspicionScreen.SetActive(true);
             LoseScreen.SetActive(false);

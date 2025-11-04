@@ -14,7 +14,7 @@ public class NPCRouting : MonoBehaviour
 
     private NavMeshAgent agent;
     private int currentWaypoint = 0;
-    private bool waitingForPlayer = false;
+    public bool waitingForPlayer = false;
     private bool playerInteracted = false;
     private bool pressed = false;
     private Vector3 spawnPosition;       // Original spawn point
@@ -74,7 +74,7 @@ public class NPCRouting : MonoBehaviour
         }
 
         // Check for VR interaction
-        if (waitingForPlayer && orders.SoldToCustomer && pressed)
+        if (waitingForPlayer && orders.SoldToCustomer)
         {
             playerInteracted = true;
             waitingForPlayer = false;
