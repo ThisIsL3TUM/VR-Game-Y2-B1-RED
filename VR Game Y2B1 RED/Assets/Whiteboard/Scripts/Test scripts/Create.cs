@@ -31,37 +31,37 @@ public class Create : MonoBehaviour
 
     void Start()
     {
-        UpdateQuestText();
-        customButton.action.started += Drop;
+        UpdateQuestText();//change the text in our object
+        customButton.action.started += Drop;//subcribing drop to teh custom button
 
-        interactable = GetComponent<XRBaseInteractable>();
+        
         interactable = GetComponent<XRBaseInteractable>();
         if (interactable == null)
         {
-            interactable = gameObject.AddComponent<XRSimpleInteractable>();
+            interactable = gameObject.AddComponent<XRSimpleInteractable>();//giving the object simple iteractible script so we can get hover events
         }
 
-        // Subscribe to hover events
-        interactable.hoverEntered.AddListener(OnHoverEnter);
-        interactable.hoverExited.AddListener(OnHoverExit);
+        
+        interactable.hoverEntered.AddListener(OnHoverEnter);//subcribing hover to our function
+        interactable.hoverExited.AddListener(OnHoverExit);//getting when we leave hover
 
         
         
 
         if (objectRenderer != null)
         {
-            matInstance = objectRenderer.material; // create an instance for this object
-            originalColor = matInstance.color;
+            matInstance = objectRenderer.material;//getting renderer
+            originalColor = matInstance.color;//remembering original color
         }
     }
-
+    //switching our bool plus calling highlight function
     private void OnHoverEnter(HoverEnterEventArgs args)
     {
         isHovering = true;
         Highlight(true);
         Debug.Log("Hovering over seed crate");
     }
-
+    //opposite of OnHoverEnter triggered upon exiting
     private void OnHoverExit(HoverExitEventArgs args)
     {
         isHovering = false;
@@ -71,58 +71,69 @@ public class Create : MonoBehaviour
 
     private void Highlight(bool active)
     {
-        if (matInstance != null)
+        if (matInstance != null)//just making sure we actually have the variable set
         {
-            matInstance.color = active ? highlightColor : originalColor;
+            matInstance.color = active ? highlightColor : originalColor;//below a longer way of making the same thing(at first i was confused by how this line works too when i was searching for more optimal ways of switching colors)
+
+            /*if (active)
+    matInstance.color = highlightColor;
+else
+    matInstance.color = originalColor;
+            */
         }
     }
 
+    //function to change our pressed variable
     void Drop(InputAction.CallbackContext context)
     {
-        pressed = !pressed;
+        pressed = !pressed;//change pressed to the opposite of what it is rn
         Debug.Log("boolean is " + pressed);
     }
 
+    //buy function
     private void CheckBuyInput()
     {
-        if (pressed == true)
+        if (pressed == true)//checking if we pressed desired button
         {
             pressed = false;
-            orders.Money -= Cost;
-            stock++;
-            UpdateQuestText();
-            orders.UpdateQuestText();
+            orders.Money -= Cost;//count away cost from our money
+            stock++;//add one stock
+            UpdateQuestText();//change text of our stock
+            orders.UpdateQuestText();//we update the UI of the amount of money by calling this function
         }
     }
 
     void Update()
     {
-        if (isHovering && orders.Money >= Cost)
+        if (isHovering && orders.Money >= Cost)//checking if we can afford the item and are hovering(could have just added pressed bool in here idk why i didnt)
             
             CheckBuyInput();
     }
 
+
+    
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag(targetTag) && !ListItem.Contains(other.gameObject))
+        if (other.gameObject.CompareTag(targetTag) && !ListItem.Contains(other.gameObject))//checking if the item that we took from the collider is the correct one and adding it to a list to avoid duping
         {
             ListItem.Add(other.gameObject);
             if (stock != 0)
-                StartCoroutine(RestockTime());
+                StartCoroutine(RestockTime());//starting the restock process through a routine to avoid glitchy behaviour 
         }
     }
 
+
     void UpdateQuestText()
     {
-        questText.text = $"<b>Remaining:</b>\n<b>{stock}</b>\n<b>Buy More for ${Cost}</b>";
+        questText.text = $"<b>Remaining:</b>\n<b>{stock}</b>\n<b>Buy More for ${Cost}</b>";//text update of the stock amount
     }
 
     private System.Collections.IEnumerator RestockTime()
     {
-        Vector3 spawnPos = SpawnPos.transform.position;
-        yield return new WaitForSeconds(2);
-        Instantiate(Item, spawnPos, SpawnPos.transform.rotation);
-        stock--;
-        UpdateQuestText();
+        Vector3 spawnPos = SpawnPos.transform.position;//getting spawn position for our item
+        yield return new WaitForSeconds(2);//making sure to wait to avoid it spawning within the item we are taking away and getting flung
+        Instantiate(Item, spawnPos, SpawnPos.transform.rotation);//spawn the item
+        stock--;//lower stock
+        UpdateQuestText();//update stock text
     }
 }

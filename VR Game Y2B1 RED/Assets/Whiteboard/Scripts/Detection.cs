@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -28,12 +29,14 @@ public class Detection : MonoBehaviour
     private VisualEffect vfx;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    //making sure we stop the vfx from playing
     void Start()
     {
         vfx.Stop();
     }
 
-    // Update is called once per frame
+    // checking for collision each frame if condition is met we begin the merge
     void Update()
     {
         if (collisionTracker.GetCollisionCount() == 2)
@@ -47,11 +50,11 @@ public class Detection : MonoBehaviour
     {
         for (int i = 0; i < Compare.Length; i++)
         {
-            if (collision.collider.CompareTag(Compare[i]))
+            if (collision.collider.CompareTag(Compare[i])) //we check if the tag is found within our list
             {
-                Decide(Compare[i], true); // set true when entering
+                Decide(Compare[i], true); // set true in teh switch statement
 
-                if (!Ingredient.Contains(collision.gameObject))
+                if (!Ingredient.Contains(collision.gameObject)) // we make sure to not double up on ingredients
                 {
                     Ingredient.Add(collision.gameObject);
                 }
@@ -59,6 +62,7 @@ public class Detection : MonoBehaviour
         }
     }
 
+    //removing the object upon exiting 
     private void OnCollisionExit(Collision collision)
     {
         for (int i = 0; i < Compare.Length; i++)
@@ -76,6 +80,7 @@ public class Detection : MonoBehaviour
         }
     }
 
+    //our switch
     void Decide(string tag, bool state)
     {
         switch (tag)
@@ -92,18 +97,20 @@ public class Detection : MonoBehaviour
         }
     }
 
+    //merge function
+
     void Merge()
     {
-        Vector3 spawnPos = (spawn.transform.position);
-        if (Speed == true && Power == true || Power == true && Speed == true) 
+        Vector3 spawnPos = (spawn.transform.position); //setting spawn position for our merged object
+        if (Speed == true && Power == true || Power == true && Speed == true) //checking for correct crafting recipe
         {
-            vfx.Play();
-            syringe = Instantiate(Product[0], spawnPos, Quaternion.identity);
+            vfx.Play(); //playing vfx
+            syringe = Instantiate(Product[0], spawnPos, Quaternion.identity);//instantieting our prefab
             if (syringe != null)
             {
-                syringe.GetComponent<Injection>().dose1 = true;
+                syringe.GetComponent<Injection>().dose1 = true; //setting the syringes dosage according to the craft
             }
-                Reset();
+                Reset(); //calling our reset
         }
             else if (Speed == true && Something == true || Something == true && Speed == true)
         {
@@ -129,12 +136,15 @@ public class Detection : MonoBehaviour
         
 
 }
+    //just a delay to let the vfx paly
     private System.Collections.IEnumerator VfxStop()
     {
         yield return new WaitForSeconds(1);
         vfx.Stop();
     }
 
+
+    //reset functions switching off variables and clearing list calling our vfx stop
     private void Reset()
     {
         StartCoroutine(VfxStop());

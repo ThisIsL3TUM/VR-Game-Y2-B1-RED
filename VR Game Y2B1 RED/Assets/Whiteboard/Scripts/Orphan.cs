@@ -10,19 +10,19 @@ public class Orphan : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();//getting rigidbody
     }
     void OnEnable()
     {
-        grabInteractable = GetComponent<XRGrabInteractable>();
+        grabInteractable = GetComponent<XRGrabInteractable>();//getting the xrgrab script
         
-        grabInteractable.selectExited.AddListener(OnRelease);
+        grabInteractable.selectExited.AddListener(OnRelease);//upon releasing call function
     }
 
     
 
     private void OnRelease(SelectExitEventArgs args)
     {
-        rb.transform.parent = null;
+        rb.transform.parent = null;//make the object lose its parent
     }
 }

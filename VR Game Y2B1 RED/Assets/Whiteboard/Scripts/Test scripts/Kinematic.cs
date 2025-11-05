@@ -21,18 +21,18 @@ public class Kinematic : MonoBehaviour
 
     private void OnGrab(SelectEnterEventArgs args)
     {
-        // Wait a frame to override XR toolkit’s auto-setting
-        StartCoroutine(MakeNonKinematicNextFrame());
+        
+        StartCoroutine(MakeNonKinematicNextFrame());//coroutine to override XR toolkit’s auto-setting
     }
 
     private System.Collections.IEnumerator MakeNonKinematicNextFrame()
     {
-        yield return null; // wait one frame
+        yield return null; //wait a frame
         rb.isKinematic = false;
     }
 
     private void OnRelease(SelectExitEventArgs args)
     {
-        rb.isKinematic = false;
+        rb.isKinematic = false;//turning off kinematic
     }
 }

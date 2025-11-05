@@ -31,20 +31,20 @@ public class Injection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GrownCarrot")|| other.CompareTag("TomatoG") || other.CompareTag("Lettuce"))
+        if (other.CompareTag("GrownCarrot")|| other.CompareTag("TomatoG") || other.CompareTag("Lettuce"))//checking if the object within trigger is one of our veggies
             
         {
-                injection = other.gameObject;
-                if (dose1 == true && injection.GetComponent<Drugged>().drugged == false) 
+                injection = other.gameObject;//just to shorten the lines
+                if (dose1 == true && injection.GetComponent<Drugged>().drugged == false) //get what drug this object is carrying and transfering plus a check so we cant drug the same veggie multiple times
                 { 
-                injection.GetComponent<Drugged>().drug1 = true; 
-                injection.GetComponent<Drugged>().amDrugged();
-                waterEffect.Play();
-                audioSource.PlayOneShot(grabClip);
-                StartCoroutine(Sound());
+                injection.GetComponent<Drugged>().drug1 = true; //set the veggies drug on
+                injection.GetComponent<Drugged>().amDrugged();//star the veggies am drugged function
+                waterEffect.Play();//play corresponding vfx its not a water vfx but the naming is special
+                audioSource.PlayOneShot(grabClip);//play proper audio
+                StartCoroutine(Sound());//play second audio after delay
                 Debug.Log("drugged");
                 
-                durability--;
+                durability--;//decrease durability
                 }
                 else if (dose2 == true && injection.GetComponent<Drugged>().drugged == false)
                 { 
@@ -69,13 +69,13 @@ public class Injection : MonoBehaviour
                 
                 durability--;
                 }
-                if(durability == 0) {Destroy(this.gameObject);}
+                if(durability == 0) {Destroy(this.gameObject);}//destroy self upon 0 durability
         }
     }
 
     private System.Collections.IEnumerator Sound()
     {
-        yield return new WaitForSeconds(2);
-        audioSource.PlayOneShot(voiceSource);
+        yield return new WaitForSeconds(2);//wait 2 secs
+        audioSource.PlayOneShot(voiceSource);//play second sound
     }
 }

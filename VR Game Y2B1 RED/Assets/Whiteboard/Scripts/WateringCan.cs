@@ -15,20 +15,20 @@ public class WateringCan : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waterEffect == null)
+        if (waterEffect == null)//just a check to avoid errors
             return;
 
-        float angle = Vector3.Angle(transform.up, Vector3.up);
+        float angle = Vector3.Angle(transform.up, Vector3.up);//setting up the desired angle
 
-        // Check if the watering state should change
-        if (angle > tiltThreshold && !isWatering)
+        
+        if (angle > tiltThreshold && !isWatering)//check if the watering state should change
         {
             isWatering = true;
-            if (!waterEffect.isPlaying)
-                waterEffect.Play();
+            if (!waterEffect.isPlaying)//extra check kept running into buggy behaviour adding to checks fixed it
+                waterEffect.Play();//play effect
             Debug.Log("Started watering");
         }
-        else if (angle <= tiltThreshold && isWatering)
+        else if (angle <= tiltThreshold && isWatering)//check if the watering state should change
         {
             isWatering = false;
             if (waterEffect.isPlaying)

@@ -6,9 +6,11 @@ public class DirtCarry : MonoBehaviour
     public Transform carryPoint;           // empty child object on hoe where dirt should attach
     public InputActionReference customButton;
     public bool Attached = false;
+
+    //in start we get our input action for dropping dirt
     private void Start()
     {
-        customButton.action.started += Drop;
+        customButton.action.started += Drop;//subcribing our input to the function
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -30,7 +32,7 @@ public class DirtCarry : MonoBehaviour
         if (rb != null) rb.isKinematic = true;
 
         // Attach to hoe's carry point
-        
+        //and make sure the picked up dirt doesnt get deformed
         dirt.transform.SetParent(carryPoint, true);
         dirt.transform.localPosition = Vector3.zero;
         dirt.transform.localRotation = Quaternion.identity;

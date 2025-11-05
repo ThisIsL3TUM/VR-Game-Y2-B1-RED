@@ -21,26 +21,28 @@ public class Hoe : MonoBehaviour
     {
         
     }
+    //on trigger enter we check if its the hoe if so we play vfx sound and lower the count of dirt transform
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Hoe"))
         {
             DirtTransform--;
-            waterEffect.Play();
+            waterEffect.Play();//Just plays a sound effect. confusing naming due to copy pasting it between scripts
             audioSource.PlayOneShot(dirtClip);
-            if (DirtTransform == 0)
+            if (DirtTransform == 0)//a check to start our function
             {
                 CreateDirt();
             }
         }
     }
 
+    //we just create tilled dirt in the place of our old
     void CreateDirt()
     {
         Instantiate(HoedDirt, this.gameObject.transform.position, Quaternion.identity);
         ingredient.dirt = true;
-        collisionTracker.collidingObjects.Remove(this.gameObject);
-        Destroy(this.gameObject);
+        collisionTracker.collidingObjects.Remove(this.gameObject);//making sure its not kept within the collision tracker
+        Destroy(this.gameObject);//make we delete our previous dirt
     }
    
 }

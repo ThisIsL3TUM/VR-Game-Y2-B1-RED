@@ -7753,7 +7753,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5550692148645466950, guid: 6709911174d2a4b44bebae6d6caf2052, type: 3}
       propertyPath: Cost
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5550692148645466950, guid: 6709911174d2a4b44bebae6d6caf2052, type: 3}
       propertyPath: Item
@@ -20986,7 +20986,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4450270799197087930, guid: 1701f81673c71c44481e9d9c98dfbb9f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.4930003
+      value: 2.28
       objectReference: {fileID: 0}
     - target: {fileID: 4450270799197087930, guid: 1701f81673c71c44481e9d9c98dfbb9f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24229,7 +24229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5550692148645466950, guid: 6709911174d2a4b44bebae6d6caf2052, type: 3}
       propertyPath: Cost
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5550692148645466950, guid: 6709911174d2a4b44bebae6d6caf2052, type: 3}
       propertyPath: Item
@@ -24237,7 +24237,7 @@ PrefabInstance:
       objectReference: {fileID: 6537734710725797607, guid: af5eb8824f739ea44b0de84e4c5773de, type: 3}
     - target: {fileID: 5550692148645466950, guid: 6709911174d2a4b44bebae6d6caf2052, type: 3}
       propertyPath: stock
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5550692148645466950, guid: 6709911174d2a4b44bebae6d6caf2052, type: 3}
       propertyPath: orders
@@ -31275,10 +31275,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Go to the mixing station at the backside of the shed. Choose 2 chemicals
-    and put them at the top of the station. It will create a syringe filled with
-    a potion which will get people addicted to your crops and thus fill your addiction
-    meter. '
+  m_text: 'take a crop and go to the mixing station at the backside of the shed.
+    Choose 2 chemicals and put them at the top of the station. take two vails to
+    make your potion. All potions have different levels of addiction. The higher
+    the addiction level the more suspicious it will be. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
@@ -32393,9 +32393,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Use your money in the shop section in the shed to buy new chemicals and
-    make your crop even more addictive! But make sure to not raise your suspicion
-    meter too much or it is Game Over!
+  m_text: 'Now it is time to sell it! Grab your altered crop and put it on one of
+    the shelves at the front side of the shed. Use your money in the shop section
+    in the shed to buy new chemicals and make your crop even more addictive! '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
@@ -34451,10 +34451,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "To combine your crop with the potion you must hold a vegetable and a syringe
-    and inject the tip of the syringe into the vegetable. \r\nNow it is time to sell
-    it! Grab your altered crop and put it on one of the shelves at the front side
-    of the shed. \r\n"
+  m_text: 'The vails on the shelfs are aranged from least to most strong. The syringe
+    that gets produced can be used to inject the vegetable with the potion. Make
+    sure to not raise your suspicion meter too much or it is Game Over!
+
+    
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
@@ -35024,9 +35027,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Your vegetable is now growing! But no plant can grow without water\u2026
-    \r\nNow that you have grown your own vegetables, it's time to prepare them for
-    the community\u2026\r\n"
+  m_text: "Your vegetable is now growing! But no plant can grow without water\u2026 
+    Use the watering can to water your crops.\r\nNow that you have grown your own
+    vegetables, it's time to prepare them for the community\u2026\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: f675742eaf9c20a4f909d78ee7a14fed, type: 2}
@@ -39734,7 +39737,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GG go next ;)
+  m_text: Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}
   m_sharedMaterial: {fileID: 4687939059374929122, guid: fbb7c6a04be6d8341934b839f24b42e1, type: 2}

@@ -9,26 +9,26 @@ public class GrabSound : MonoBehaviour
 
     private void Awake()
     {
-        grabInteractable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+        grabInteractable = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();//getting grab script
     }
 
     private void OnEnable()
     {
         if (grabInteractable != null)
-            grabInteractable.selectEntered.AddListener(OnGrab);
+            grabInteractable.selectEntered.AddListener(OnGrab);//once grabbed call function
     }
 
     private void OnDisable()
     {
         if (grabInteractable != null)
-            grabInteractable.selectEntered.RemoveListener(OnGrab);
+            grabInteractable.selectEntered.RemoveListener(OnGrab);//preventing buggy behaviour/scene clean up
     }
 
     private void OnGrab(SelectEnterEventArgs args)
     {
-        if (audioSource != null && grabClip != null)
+        if (audioSource != null && grabClip != null)//checks to prevent errors
         {
-            audioSource.PlayOneShot(grabClip);
+            audioSource.PlayOneShot(grabClip);//play sound
         }
     }
 }

@@ -20,7 +20,7 @@ public class Drugged : MonoBehaviour
 
     public void amDrugged()
     {
-        if (drug1 == true || drug2 == true || drug3 == true) { drugged = true; Debug.Log("Already got my dose"); }
-
+        if (drug1 == true || drug2 == true || drug3 == true) { drugged = true; Debug.Log("Already got my dose"); }//just check if it has any drug
+        //its done through a function bcs we wanted to also make some visual changes to the crop itself like the material changing/glowing but didnt do it in the end
     }
 }

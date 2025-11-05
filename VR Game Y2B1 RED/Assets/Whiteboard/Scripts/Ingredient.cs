@@ -26,20 +26,20 @@ public class Ingredient : MonoBehaviour
 
     private void Update()
     {
-        if (collisionTracker.GetCollisionCount() == 2 && currentlyGrowing == false)
+        if (collisionTracker.GetCollisionCount() == 2 && currentlyGrowing == false)//using the collision detection scripts function we check if we have the wanter number of objects
         {
-            StartGrow();
+            StartGrow();//start function
         }
         else return;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Dirt"))
+        if (!other.CompareTag("Dirt"))//checking if its anything other then dirt
         {
             
-            Planted(other.tag, true);
-            if (!other.CompareTag("HoedDirt") && !other.CompareTag("Hoe") && !other.CompareTag("Player") && !other.CompareTag("wCan"))
+            Planted(other.tag, true);//putting the object into our switch 
+            if (!other.CompareTag("HoedDirt") && !other.CompareTag("Hoe") && !other.CompareTag("Player") && !other.CompareTag("wCan"))//additional checks to avoid bugs
             {
                 if (!Thingie.Contains(other.gameObject))
                 {
@@ -72,7 +72,7 @@ public class Ingredient : MonoBehaviour
         }
     */
     }
-
+    //the oppositte of enter just removing thing upon leaving
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Dirt"))
@@ -91,6 +91,7 @@ public class Ingredient : MonoBehaviour
         }
     }
 
+    //simple switch
     private void Planted(string tag, bool state)
     {
         
@@ -113,21 +114,21 @@ public class Ingredient : MonoBehaviour
 
         }
     }
-
+    
     private void StartGrow()
     {
        
-        Vector3 spawnPos = (spawn.transform.position);
-        for(int i = 0; i < vegetables.Length; i++)
+        Vector3 spawnPos = (spawn.transform.position);//setting spawn position
+        for(int i = 0; i < vegetables.Length; i++)//going through the whole array
         {
-            if (vegetables[i] == true && dirt == true || dirt == true && vegetables[i] == true)
+            if (vegetables[i] == true && dirt == true || dirt == true && vegetables[i] == true)//checking for viable combos
             {
                 
-                crop = Instantiate(Product[i], spawnPos, spawn.transform.rotation);
+                crop = Instantiate(Product[i], spawnPos, spawn.transform.rotation);//create crop
 
-                joseph = Product[i].GetComponentInChildren<Growth>().growthTime;
+                joseph = Product[i].GetComponentInChildren<Growth>().growthTime;//getting growth time of the created crop
                 currentlyGrowing = true;
-                StartCoroutine(Occupied());
+                StartCoroutine(Occupied());//coroutine start
 
 
                 Reset();
@@ -137,13 +138,13 @@ public class Ingredient : MonoBehaviour
         
     }
 
-
+    //making sure we cant plant a seed in the same patch for the period of growth
     public System.Collections.IEnumerator Occupied()
     {
-        yield return new WaitForSeconds(joseph + joseph/2);
+        yield return new WaitForSeconds(joseph);
         currentlyGrowing = false;
     }
-
+    //reset function setting all important variables to false and clearing out the lists
     private void Reset() 
     {
         
